@@ -15,10 +15,12 @@ public class PostImageService {
         this.repository = repository;
     }
 
-    public PostImage findById (String imageId) throws Exception {
-        return repository
+    public PostImageDTO findById (String imageId) {
+        PostImage image =  repository
             .findById(imageId)
-            .orElseThrow(() -> new Exception("Image was not found"));
+            .orElse(PostImage.EMPTY);
+
+        return PostImageDTO.from(image);
     }
 
     public PostImageDTO upload (MultipartFile file) {
@@ -32,10 +34,7 @@ public class PostImageService {
             }
 
             PostImage image = PostImage.builder().imageData(bytes).build();
-            System.out.println(image);
             repository.save(image);
-
-            System.out.println(image.getId());
 
             return PostImageDTO.from(image);
         }catch (Exception e) {

@@ -1,16 +1,19 @@
 import React, {useEffect} from 'react';
 import {Container} from "@material-ui/core";
-import useStyles from "./PostPageStyles";
+import PostPageStyles from "./PostPageStyles";
 import {useDispatch, useSelector} from "react-redux";
-import {getPosts} from "../../store/actions/postsActions";
+import {getPosts, getPostsBySubscriber} from "../../store/actions/postsActions";
 import Typography from "@material-ui/core/Typography";
 import PostCard from "../../components/PostCard/PostCard";
 import Grid from "@material-ui/core/Grid";
 import config from "../../config";
 import {NavLink} from "react-router-dom";
+import Button from "@material-ui/core/Button";
+
+
 
 const PostPage = () => {
-    const classes = useStyles();
+    const classes = PostPageStyles();
     const dispatch = useDispatch();
     const postsData = useSelector(state => state.posts.posts);
 
@@ -22,9 +25,10 @@ const PostPage = () => {
         return (
             <PostCard
                 key={p.id}
+                id={p.id}
                 publisher={p.publishedBy}
                 description={p.description}
-                image={config.host + "/" + p.image}
+                image={config.host + "/postImages/" + p.imageId}
             />
         )
     });
@@ -35,11 +39,16 @@ const PostPage = () => {
                 <Grid component="div" item xs={12}>
                     <Typography component="h2" className={classes.title}>Post page</Typography>
                 </Grid>
+
                 <Grid component="div" item xs={12}>
                     <NavLink to="/posts/create">Add</NavLink>
                 </Grid>
 
-                <Grid container justify="space-around" spacing={4}>
+                <Grid component="div" item xs={12}>
+                    <Button onClick={() => dispatch(getPostsBySubscriber())}>FindSubs</Button>
+                </Grid>
+
+                <Grid container justify="flex-start" spacing={4}>
                     {posts}
                 </Grid>
             </Grid>

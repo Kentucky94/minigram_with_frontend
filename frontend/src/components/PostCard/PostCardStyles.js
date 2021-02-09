@@ -1,11 +1,12 @@
 import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles({
+const PostCardStyles = makeStyles({
     root: {
         maxWidth: "100%",
     },
     border: {
-        border: "2px solid black"
+        border: "2px solid black",
+        borderRadius: '30px',
     },
     media: {
         height: 140,
@@ -21,4 +22,4 @@ const useStyles = makeStyles({
     }
 });
 
-export default useStyles;
+export default PostCardStyles;

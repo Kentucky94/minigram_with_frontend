@@ -1,10 +1,11 @@
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
-const useStyles = makeStyles((theme) => ({
+const PostPageStyles = makeStyles((theme) => ({
     container: {
         background: "#8c9eff",
         padding: "30px",
-        minHeight: "90vh"
+        minHeight: "90vh",
+        borderRadius: '30px',
     },
     title: {
         fontSize: "20px",
@@ -13,4 +14,4 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default useStyles;
+export default PostPageStyles;

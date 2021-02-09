@@ -40,10 +40,10 @@ public class Post {
     public String toString() {
         return "Post{" +
                 "id=" + id +
-                ", image='" + image + '\'' +
+                ", image='" + image.getId() + '\'' +
                 ", description='" + description + '\'' +
                 ", datetime=" + datetime +
-                ", userPublisher=" + userPublisher +
+                ", userPublisher=" + userPublisher.getId() +
                 '}';
     }
 }
