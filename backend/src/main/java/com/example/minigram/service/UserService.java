@@ -10,7 +10,7 @@ public class UserService {
     @Autowired
     private UserRepository repository;
 
-    public User findById (Integer userId) {
+    public User findById (String userId) {
         return repository.findById(userId).orElse(User.EMPTY);
     }
 }

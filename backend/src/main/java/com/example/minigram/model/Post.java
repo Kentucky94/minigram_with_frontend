@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,13 +14,16 @@ import java.time.LocalDateTime;
 @Table(name = "posts")
 @Builder
 public class Post {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    public static final Post EMPTY = builder().description("fake_descr").userPublisher(User.EMPTY).build();
 
-    @Column
+    @Id
     @Builder.Default
-    private String image = "images/user.png";
+    private String id = UUID.randomUUID().toString();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "image")
+    @Builder.Default
+    private PostImage image = PostImage.EMPTY;
 
     @Column(nullable = false)
     private String description;
@@ -39,7 +43,7 @@ public class Post {
                 ", image='" + image + '\'' +
                 ", description='" + description + '\'' +
                 ", datetime=" + datetime +
-                ", userPublisher=" + userPublisher.getId() +
+                ", userPublisher=" + userPublisher +
                 '}';
     }
 }

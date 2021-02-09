@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,12 +15,14 @@ import java.time.LocalDateTime;
         name = "subscriptions",
         uniqueConstraints = { @UniqueConstraint(columnNames = {"subscriber", "subscribedTo"}) }
 )
+@Builder
 public class Subscription {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Builder.Default
+    private String id = UUID.randomUUID().toString();
 
     @Column
+    @Builder.Default
     private LocalDateTime datetime = LocalDateTime.now();
 
     @ManyToOne(fetch = FetchType.LAZY)

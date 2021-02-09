@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -11,15 +12,19 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "comments")
-public class Comments {
+@Builder
+public class Comment {
+    private static final Comment EMPTY = builder().text("testComment").userCommenter(User.EMPTY).build();
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Builder.Default
+    private String id = UUID.randomUUID().toString();
 
     @Column(nullable = false)
     private String text;
 
     @Column
+    @Builder.Default
     private LocalDateTime datetime = LocalDateTime.now();
 
     @ManyToOne(fetch = FetchType.LAZY)

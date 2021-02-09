@@ -12,3 +12,19 @@ export const getPosts = () => {
         dispatch(getPostsSuccess(posts.data));
     }
 };
+
+export const createPost = (imageData, postData) => {
+    return async dispatch => {
+        try {
+            const imageResponse = await axiosOrders.post("/postImages/upload", imageData);
+            const image = imageResponse.data;
+
+            postData.imageId = image.id;
+            const final = JSON.stringify(postData);
+
+            await axiosOrders.post("/posts/create", final, {headers: {'Content-Type': 'application/json'}});
+        } catch (e) {
+            console.log(e);
+        }
+    }
+};

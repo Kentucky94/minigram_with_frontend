@@ -13,20 +13,20 @@ public class PostDTO {
     public static PostDTO from (Post post) {
         String publisher = post.getUserPublisher() == null
                 ? "not-found"
-                : post.getUserPublisher().getUsername();
+                : post.getUserPublisher().getId();
 
         return builder()
                 .id(post.getId())
                 .description(post.getDescription())
-                .image(post.getImage())
                 .datetime(post.getDatetime())
                 .publishedBy(publisher)
+                .imageId(post.getImage().getId())
                 .build();
     }
 
-    private Integer id;
+    private String id;
     private String description;
-    private String image;
+    private String imageId;
     private LocalDateTime datetime;
     private String publishedBy;
 }

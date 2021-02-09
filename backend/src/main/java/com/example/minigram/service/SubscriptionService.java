@@ -14,9 +14,9 @@ public class SubscriptionService {
     private UserService userService;
 
     public void save (String subscriberId, String subscribedToId) {
-        User subscriber = userService.findById(Integer.parseInt(subscriberId));
+        User subscriber = userService.findById(subscriberId);
 
-        User subscribedTo = userService.findById(Integer.parseInt(subscribedToId));
+        User subscribedTo = userService.findById(subscribedToId);
 
         Subscription subscription = new Subscription();
         subscription.setUserSubscriber(subscriber);

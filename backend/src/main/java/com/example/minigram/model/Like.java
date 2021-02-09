@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -11,12 +12,14 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "likes")
+@Builder
 public class Like {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Builder.Default
+    private String id = UUID.randomUUID().toString();
 
     @Column
+    @Builder.Default
     private LocalDateTime datetime = LocalDateTime.now();
 
     @ManyToOne(fetch = FetchType.LAZY)

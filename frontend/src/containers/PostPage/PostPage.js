@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import PostCard from "../../components/PostCard/PostCard";
 import Grid from "@material-ui/core/Grid";
 import config from "../../config";
+import {NavLink} from "react-router-dom";
 
 const PostPage = () => {
     const classes = useStyles();
@@ -33,6 +34,9 @@ const PostPage = () => {
             <Grid component="div" container spacing={2}>
                 <Grid component="div" item xs={12}>
                     <Typography component="h2" className={classes.title}>Post page</Typography>
+                </Grid>
+                <Grid component="div" item xs={12}>
+                    <NavLink to="/posts/create">Add</NavLink>
                 </Grid>
 
                 <Grid container justify="space-around" spacing={4}>
