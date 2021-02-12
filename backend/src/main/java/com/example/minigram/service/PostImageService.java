@@ -4,6 +4,8 @@ import com.example.minigram.dto.PostImageDTO;
 import com.example.minigram.model.Post;
 import com.example.minigram.model.PostImage;
 import com.example.minigram.repository.PostImageRepository;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,6 +23,14 @@ public class PostImageService {
             .orElse(PostImage.EMPTY);
 
         return PostImageDTO.from(image);
+    }
+
+    public Resource findByIdAsResource (String imageId) {
+        PostImage image =  repository
+                .findById(imageId)
+                .orElseThrow(() -> new RuntimeException("No resources found"));
+
+        return new ByteArrayResource(image.getImageData());
     }
 
     public PostImageDTO upload (MultipartFile file) {
