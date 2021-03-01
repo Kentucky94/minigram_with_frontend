@@ -21,7 +21,7 @@ public class User {
     @Builder.Default
     private String id = UUID.randomUUID().toString();
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String username;
 
     @Column(nullable = false)
@@ -41,6 +41,19 @@ public class User {
     @Column
     @Builder.Default
     private int subscribersCount = 0;
+
+//    @Enumerated(EnumType.STRING)
+//    @Column(nullable = false)
+//    @Builder.Default
+//    private UserRole role = UserRole.ROLE_READER;
+
+    @Column(nullable = false)
+    @Builder.Default
+    private String roles = "ROLE_USER";
+
+    @Column
+    @Builder.Default
+    private boolean active = true;
 
     @OneToMany(mappedBy = "userPublisher", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default

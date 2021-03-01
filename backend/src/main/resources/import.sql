@@ -7,11 +7,26 @@ DROP TABLE IF EXISTS `users`;
 
 
 
+-- CREATE TABLE `users` (
+--   `id` varchar(45) NOT NULL UNIQUE,
+--   `username` varchar(45) NOT NULL UNIQUE,
+--   `password` varchar(45) NOT NULL,
+--   `email` varchar(45) NOT NULL,
+--   `role` enum('ROLE_ADMIN', 'ROLE_EDITOR', 'ROLE_READER') default 'ROLE_READER',
+--   `postsCount` int(11) NOT NULL DEFAULT '0',
+--   `subscriptionsCount` int(11) NOT NULL DEFAULT '0',
+--   `subscribersCount` int(11) NOT NULL DEFAULT '0',
+--   PRIMARY KEY (`id`),
+--   UNIQUE KEY `username_UNIQUE` (`username`)
+-- );
+
 CREATE TABLE `users` (
   `id` varchar(45) NOT NULL UNIQUE,
-  `username` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
+  `username` varchar(45) NOT NULL UNIQUE,
+  `password` varchar(100) NOT NULL,
   `email` varchar(45) NOT NULL,
+  `roles` varchar(45) default 'ROLE_USER',
+  `active` boolean default true,
   `postsCount` int(11) NOT NULL DEFAULT '0',
   `subscriptionsCount` int(11) NOT NULL DEFAULT '0',
   `subscribersCount` int(11) NOT NULL DEFAULT '0',
@@ -80,7 +95,7 @@ CREATE TABLE `comments` (
 
 
 
-INSERT INTO `users` (ID, USERNAME, PASSWORD, EMAIL) VALUES ('1', 'user1','pass1','user1@email.com');
+INSERT INTO `users` (ID, USERNAME, PASSWORD, EMAIL) VALUES ('1', 'user1','$2y$12$C.DjDk9vVGs4S9E7bhYl/OvGSfsrW3D666Gmdd3NXturiEF9zeeQu','user1@email.com');
 INSERT INTO `users` (ID, USERNAME, PASSWORD, EMAIL) VALUES ('2', 'user2','pass2','user2@email.com');
 INSERT INTO `users` (ID, USERNAME, PASSWORD, EMAIL) VALUES ('3', 'user3','pass3','user3@email.com');
 
