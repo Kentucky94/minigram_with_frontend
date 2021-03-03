@@ -6,9 +6,13 @@ const getPostsSuccess = posts => ({type: GET_POSTS_SUCCESS, payload: {posts}});
 
 export const getPosts = () => {
     return async dispatch => {
-        const posts = await axiosOrders.get("/posts");
+        try {
+            const posts = await axiosOrders.get("/posts");
 
-        dispatch(getPostsSuccess(posts.data));
+            dispatch(getPostsSuccess(posts.data));
+        } catch (e) {
+            console.log(e);
+        }
     }
 };
 
@@ -32,6 +36,7 @@ export const createPost = (imageData, postData) => {
             const final = JSON.stringify(postData);
 
             await axiosOrders.post("/posts/create", final, {headers: {'Content-Type': 'application/json'}});
+            // await axiosOrders.post("/posts/create", final);
         } catch (e) {
             console.log(e);
         }

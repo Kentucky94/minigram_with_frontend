@@ -4,16 +4,18 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 import PostPage from "../../containers/PostPage/PostPage";
 import CreatePostPage from "../../containers/CreatePostPage/CreatePostPage";
+import LoginPage from "../../containers/LoginPage/LoginPage";
 
 const Layout = () => {
     return (
-        <div style={{background: "black"}}>
-            <Appbar />
-
+        <div>
             <Router>
+                <Appbar />
+
                 <Switch>
                     <Route path="/" exact component={PostPage} />
                     <Route path="/posts/create" exact component={CreatePostPage} />
+                    <Route path="/login" exact component={LoginPage} />
                 </Switch>
             </Router>
         </div>

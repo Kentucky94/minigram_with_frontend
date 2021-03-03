@@ -7,14 +7,22 @@ import postsReducer from "./store/reducers/postsReducer";
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import sessionReducer from "./store/reducers/sessionReducer";
+import {loadFromLocalStorage, localStorageMiddleware} from "./store/localStorage";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const reducers = combineReducers({
-    posts: postsReducer
+    posts: postsReducer,
+    session: sessionReducer
 });
 
-const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
+const middleware = [
+    thunk,
+    localStorageMiddleware
+];
+
+export const store = createStore(reducers, loadFromLocalStorage(), composeEnhancers(applyMiddleware(...middleware)));
 
 ReactDOM.render(
   <Provider store={store}>

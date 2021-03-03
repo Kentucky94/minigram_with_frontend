@@ -8,6 +8,7 @@ import Button from "@material-ui/core/Button";
 import MenuIcon from '@material-ui/icons/Menu';
 import useStyles from "./AppbarStyles";
 import {Container} from "@material-ui/core";
+import {NavLink} from "react-router-dom";
 
 const Appbar = () => {
     const classes = useStyles();
@@ -20,7 +21,7 @@ const Appbar = () => {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
-                        News
+                        <NavLink to={"/"}>News</NavLink>
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
