@@ -16,6 +16,18 @@ export const getPosts = () => {
     }
 };
 
+export const deletePostById = id => {
+    return async dispatch => {
+        try {
+            await axiosOrders.delete(`/posts/${id}`);
+
+            dispatch(getPosts());
+        } catch (e) {
+            console.log(e);
+        }
+    }
+};
+
 export const getPostsBySubscriber = data => {
     return async dispatch => {
         try {

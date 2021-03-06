@@ -3,18 +3,19 @@ import ReactDOM from 'react-dom';
 import {createStore, combineReducers, applyMiddleware, compose} from "redux";
 import {Provider} from 'react-redux';
 import thunk from "redux-thunk";
+
+import usersReducer from "./store/reducers/usersReducer";
 import postsReducer from "./store/reducers/postsReducer";
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import sessionReducer from "./store/reducers/sessionReducer";
 import {loadFromLocalStorage, localStorageMiddleware} from "./store/localStorage";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const reducers = combineReducers({
     posts: postsReducer,
-    session: sessionReducer
+    users: usersReducer
 });
 
 const middleware = [

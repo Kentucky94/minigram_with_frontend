@@ -8,11 +8,11 @@ const axiosOrders = axios.create({
 
 axiosOrders.interceptors.request.use(config => {
     try {
-        config.headers.ContentType = `application/json`;
-        const token = store.getState().session.token;
+        config.headers.ContentType = 'application/json';
+        const user = store.getState().users.user;
 
-        if (token) {
-            config.headers.Authorization = `Token ${token}`;
+        if (user) {
+            config.headers.Authorization = `Token ${user.token}`;
         }
     } catch (e) {
         console.log(e);

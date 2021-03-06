@@ -4,7 +4,6 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import MenuIcon from '@material-ui/icons/Menu';
 import useStyles from "./AppbarStyles";
 import {Container} from "@material-ui/core";
@@ -21,9 +20,10 @@ const Appbar = () => {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
-                        <NavLink to={"/"}>News</NavLink>
+                        <NavLink to="/">News</NavLink>
                     </Typography>
-                    <Button color="inherit">Login</Button>
+                    <NavLink to="/login" color="inherit">Login</NavLink>
+                    <NavLink to="/register" color="inherit">Register</NavLink>
                 </Toolbar>
             </AppBar>
         </Container>

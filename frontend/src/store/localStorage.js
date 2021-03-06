@@ -1,4 +1,4 @@
-import {AUTHENTICATION_SUCCESS} from "./actions/sessionActions";
+import {AUTHENTICATION_SUCCESS} from "./actions/usersActions";
 
 const actionsList = [AUTHENTICATION_SUCCESS];
 

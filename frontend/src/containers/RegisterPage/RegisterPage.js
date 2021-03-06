@@ -6,27 +6,24 @@ import Avatar from "@material-ui/core/Avatar";
 import LockOutlinedIcon from "@material-ui/core/SvgIcon/SvgIcon";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox/Checkbox";
 import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
-import Link from "@material-ui/core/Link";
 import {useDispatch} from "react-redux";
-import {authenticate} from "../../store/actions/usersActions";
+import {registerUser} from "../../store/actions/usersActions";
 
-const LoginPage = () => {
+const RegisterPage = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
 
     const [state, setState] = useState({
         username: '',
-        password: ''
+        password: '',
+        email: ''
     });
 
     const onSubmitHandler = e => {
         e.preventDefault();
 
-        dispatch(authenticate({username: state.username, password: state.password}));
+        dispatch(registerUser({username: state.username, password: state.password, email: state.email}));
     };
 
     const onFieldChange = e => {
@@ -69,10 +66,19 @@ const LoginPage = () => {
                         id="password"
                         autoComplete="current-password"
                     />
-                    <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" />}
-                        label="Remember me"
+
+                    <TextField
+                        onChange={onFieldChange}
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="email"
+                        label="Email"
+                        type="text"
+                        id="email"
                     />
+
                     <Button
                         type="submit"
                         fullWidth
@@ -80,24 +86,13 @@ const LoginPage = () => {
                         color="primary"
                         className={classes.submit}
                     >
-                        Sign In
+                        Sign Up
                     </Button>
-                    <Grid container>
-                        <Grid item xs>
-                            <Link href="#" variant="body2">
-                                Forgot password?
-                            </Link>
-                        </Grid>
-                        <Grid item>
-                            <Link href="#" variant="body2">
-                                {"Don't have an account? Sign Up"}
-                            </Link>
-                        </Grid>
-                    </Grid>
+
                 </form>
             </div>
         </Container>
     );
 };
 
-export default LoginPage;
+export default RegisterPage;

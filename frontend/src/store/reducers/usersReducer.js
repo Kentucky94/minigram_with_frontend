@@ -1,13 +1,13 @@
-import {AUTHENTICATION_SUCCESS} from "../actions/sessionActions";
+import {AUTHENTICATION_SUCCESS} from "../actions/usersActions";
 
 const initialState = {
-    token: null
+    user: null
 };
 
 const sessionReducer = (state = initialState, action) => {
     switch (action.type) {
         case AUTHENTICATION_SUCCESS:
-            return {...state, token: action.payload.token};
+            return {...state, user: action.payload.user};
         default:
             return state;
     }

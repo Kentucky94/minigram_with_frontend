@@ -1,5 +1,6 @@
 package com.example.minigram.util;
 
+import com.example.minigram.dto.UserDTO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -50,6 +51,11 @@ public class JwtUtil {
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
         return createToken (claims, userDetails.getUsername());
+    }
+
+    public String generateToken(UserDTO userDto) {
+        Map<String, Object> claims = new HashMap<>();
+        return createToken (claims, userDto.getUsername());
     }
 
     public Boolean validateToken (String token, UserDetails userDetails) {
