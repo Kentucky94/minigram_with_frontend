@@ -13,6 +13,7 @@ axiosOrders.interceptors.request.use(config => {
 
         if (user) {
             config.headers.Authorization = `Token ${user.token}`;
+            // config.headers.Authorization = `Token faketoken`;
         }
     } catch (e) {
         console.log(e);

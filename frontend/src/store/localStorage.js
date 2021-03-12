@@ -29,8 +29,8 @@ export const localStorageMiddleware = store => next => action => {
 
     if (actionsList.includes(action.type)) {
         saveToLocalStorage({
-            session: {
-                token: store.getState().session.token,
+            users: {
+                user: store.getState().users.user,
             }
         })
     }

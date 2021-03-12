@@ -14,6 +14,9 @@ const useStyles = makeStyles((theme) => ({
     title: {
         flexGrow: 1,
     },
+    link: {
+        padding: "0 20px",
+    },
 }));
 
 export default useStyles;

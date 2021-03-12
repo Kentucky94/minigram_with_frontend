@@ -1,17 +1,22 @@
 import axiosOrders from "../../axiosOrders";
+import {push} from 'connected-react-router';
 
 export const REGISTER_USER_SUCCESS = "REGISTER_USER_SUCCESS";
 export const AUTHENTICATION_SUCCESS = "AUTHENTICATION_SUCCESS";
 
+
+
 const authenticationSuccess = (user) => ({type: AUTHENTICATION_SUCCESS, payload: {user}});
-
-
 
 export const registerUser = userData => {
     return async dispatch => {
-        const newUser = await axiosOrders.post("/users/register", userData,{headers: {ContentType: "application/json"}});
+        try {
+            await axiosOrders.post("/users/register", userData,{headers: {ContentType: "application/json"}});
 
-        console.log(newUser);
+            dispatch(push('/'));
+        } catch (e) {
+            console.log(e);
+        }
     }
 };
 
@@ -20,7 +25,8 @@ export const authenticate = (authenticationDetails) => {
         try {
             const response = await axiosOrders.post("/users/authenticate", authenticationDetails);
 
-            dispatch(authenticationSuccess(response.data))
+            dispatch(authenticationSuccess(response.data));
+            dispatch(push('/'));
         } catch (e) {
             console.log(e);
         }

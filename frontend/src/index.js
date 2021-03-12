@@ -1,35 +1,46 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore, combineReducers, applyMiddleware, compose} from "redux";
+import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import {Provider} from 'react-redux';
 import thunk from "redux-thunk";
+import {ConnectedRouter, routerMiddleware, connectRouter} from "connected-react-router";
+import {createBrowserHistory} from "history";
 
 import usersReducer from "./store/reducers/usersReducer";
 import postsReducer from "./store/reducers/postsReducer";
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 import {loadFromLocalStorage, localStorageMiddleware} from "./store/localStorage";
+import App from './App';
 
+import './index.css';
+import reportWebVitals from './reportWebVitals';
+
+
+const history = createBrowserHistory();
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const reducers = combineReducers({
+    router: connectRouter(history),
     posts: postsReducer,
-    users: usersReducer
+    users: usersReducer,
 });
 
 const middleware = [
     thunk,
-    localStorageMiddleware
+    localStorageMiddleware,
+    routerMiddleware(history),
 ];
 
 export const store = createStore(reducers, loadFromLocalStorage(), composeEnhancers(applyMiddleware(...middleware)));
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <Provider store={store}>
+            <ConnectedRouter history={history}>
+                <App />
+            </ConnectedRouter>
+        </Provider>,
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
